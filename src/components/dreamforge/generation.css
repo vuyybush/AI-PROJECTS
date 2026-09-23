@@ -1,0 +1,21 @@
+.dreamforge .df-download {
+  margin: 0 28px 24px;
+  padding: 14px 20px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  min-height: 48px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid var(--accent);
+  text-decoration: none;
+}
+.dreamforge .df-download:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+.dreamforge .df-preview-stage > img { object-fit: contain; }
+
+@media (max-width: 767px) {
+  .dreamforge .df-download { margin: 0 18px 18px; }
+}
