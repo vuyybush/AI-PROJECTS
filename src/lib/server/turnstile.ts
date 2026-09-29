@@ -2,7 +2,7 @@ import "server-only";
 import { appOrigin } from "./accounts";
 import { GenerationError } from "./http";
 
-export async function verifyHuman(token:unknown,action:"generate"|"account") {
+export async function verifyHuman(token:unknown,action:"generate"|"account"|"enhance") {
   const secret=process.env.TURNSTILE_SECRET_KEY;
   const hostname=new URL(appOrigin()).hostname;
   if(!secret) throw new GenerationError(503,"VERIFICATION_UNAVAILABLE","Human verification is not configured yet.");

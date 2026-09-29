@@ -4,6 +4,7 @@ import {CANVASES, MAX_PROMPT_LENGTH, STYLE_SUFFIXES, type Canvas, type Engine, t
 import "./creative-studio.css";
 import {useAccount} from "./AccountProvider";
 import HumanCheck,{type HumanCheckHandle} from "./HumanCheck";
+import FireballGuide,{type GuideRequest,type GuideOutcome} from "./FireballGuide";
 
 type Settings = {style: GenerationStyle; engine: Engine; canvas: Canvas; styleNotes: string};
 type Saved = Settings & {id: string; name: string};
@@ -51,20 +52,24 @@ export default function CreativeStudio({idea}: {idea: {prompt:string;style:Gener
     setDraft(candidate);setError("");
   }
   function stop(){controller.current?.abort();controller.current=null;setBusy(false);setNotice("Stopped waiting. Completed images are kept; an in-flight request may still use quota.");}
-  async function generate(event:FormEvent){
-    event.preventDefault();if(controller.current)return;
-    if(!user){setError("Sign in before generating.");return;}
-    if(prompt.trim().length<3||prompt.length>MAX_PROMPT_LENGTH){setError(`Use 3–${MAX_PROMPT_LENGTH} characters.`);return;}
+  async function generate(event:FormEvent){event.preventDefault();await runGeneration();}
+  async function runGeneration(guide?:GuideRequest):Promise<GuideOutcome>{
+    if(controller.current)return {completed:0,error:"The studio is already generating."};
+    const snapshotSettings:Settings=guide?{style:guide.style,engine:"schnell",canvas:"square",styleNotes:""}:{...settings};
+    const submittedPrompt=(guide?.prompt??prompt).trim();const total=guide?.count??count;
+    if(!user){setError("Sign in before generating.");return {completed:0,error:"Sign in before generating."};}
+    if(submittedPrompt.length<3||submittedPrompt.length>MAX_PROMPT_LENGTH||![1,2,4].includes(total)){setError("Check your prompt and image count.");return {completed:0,error:"Check your prompt and image count."};}
+    if(guide){setPrompt(submittedPrompt);setSettings(snapshotSettings);setCount(total);setDraft(null);}
     const control=new AbortController();controller.current=control;setBusy(true);setProgress(0);setError("");setNotice("");
     const batchId=crypto.randomUUID();setActiveBatch(batchId);
-    const snapshot={prompt:prompt.trim(),...settings};const total=count;let completed=0;let fallbackUsed=false;
+    const snapshot={prompt:submittedPrompt,...snapshotSettings};let completed=0;let fallbackUsed=false;
     try{
       for(let index=0;index<total;index++){
         setProgress(index+1);
         if(index>0){setNotice("Waiting 31 seconds before the next variation to respect the studio limit.");await new Promise<void>((resolve,reject)=>{const abort=()=>{clearTimeout(timer);reject(new Error("Cancelled."));};const timer=setTimeout(()=>{control.signal.removeEventListener("abort",abort);resolve();},31000);if(control.signal.aborted)abort();else control.signal.addEventListener("abort",abort,{once:true});});}
         const turnstileToken=await humanCheck.current?.verify(control.signal);
         if(!turnstileToken)throw new Error("Human verification is unavailable.");
-        if(control.signal.aborted||controller.current!==control)return;
+        if(control.signal.aborted||controller.current!==control)return {completed,cancelled:true};
         const timeout=setTimeout(()=>control.abort(),65000);
         try{
           const response=await fetch("/api/generate",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({...snapshot,turnstileToken}),signal:control.signal});
@@ -72,17 +77,20 @@ export default function CreativeStudio({idea}: {idea: {prompt:string;style:Gener
           const mime=response.headers.get("content-type")?.split(";")[0];
           if(mime!=="image/jpeg"&&mime!=="image/png")throw new Error("The server did not return an image.");
           const blob=await response.blob();if(!blob.size||blob.size>3*1024*1024)throw new Error("The image is empty or too large.");
-          if(controller.current!==control||control.signal.aborted)return;
+          if(controller.current!==control||control.signal.aborted)return {completed,cancelled:true};
           const usedFallback=response.headers.get("X-Generation-Fallback")==="true";
           const allowance=response.headers.get("X-User-Remaining");if(allowance!==null)setRemaining(Number(allowance));
-          const item={id:crypto.randomUUID(),url:URL.createObjectURL(blob),prompt:snapshot.prompt,settings:{...settings},batchId,saved:response.headers.get("X-History-Saved")==="true",filename:`dreamforge-${Date.now()}-${index+1}.${mime==="image/png"?"png":"jpg"}`};
+          const item={id:crypto.randomUUID(),url:URL.createObjectURL(blob),prompt:snapshot.prompt,settings:{...snapshotSettings},batchId,saved:response.headers.get("X-History-Saved")==="true",filename:`dreamforge-${Date.now()}-${index+1}.${mime==="image/png"?"png":"jpg"}`};
           if(index===0){owned.current.forEach(x=>URL.revokeObjectURL(x.url));owned.current=[];}
           owned.current=[...owned.current,item];setResults(owned.current);setSelected(item.id);completed++;if(usedFallback)fallbackUsed=true;if(item.saved)window.dispatchEvent(new Event("dreamforge-history"));
         }finally{clearTimeout(timeout);}
       }
       setNotice(`${completed} image${completed===1?"":"s"} ready. Download your favorites before leaving.${fallbackUsed?" The selected model was full, so Cloudflare's backup generated the result.":""}`);
-    }catch(failure){if(controller.current===control)setError(`${control.signal.aborted?"Generation timed out.":failure instanceof Error?failure.message:"Connection failed."}${completed?` ${completed} completed image(s) kept.`:""}`);}
-    finally{if(controller.current===control){controller.current=null;setBusy(false);}}
+      return {completed};
+    }catch(failure){
+      if(controller.current!==control)return {completed,cancelled:true};
+      const message=`${control.signal.aborted?"Generation timed out.":failure instanceof Error?failure.message:"Connection failed."}${completed?` ${completed} completed image(s) kept.`:""}`;setError(message);return {completed,error:message};
+    }finally{if(controller.current===control){controller.current=null;setBusy(false);}}
   }
   return <section id="studio" className="df-studio df-section df-creative" aria-labelledby="studio-title">
     <div className="df-section-top"><p className="df-eyebrow">01 / THE STUDIO</p><span className="df-demo-badge">TEXT → IMAGE</span></div>
@@ -114,5 +122,6 @@ export default function CreativeStudio({idea}: {idea: {prompt:string;style:Gener
       {result&&<a className="df-download" href={result.url} download={result.filename}>Download selected image ↓</a>}
       <p className="df-note df-preview-note">This preview clears on refresh or sign-out. Successfully saved images remain in your private gallery.</p>
     </div></div>
+    <FireballGuide key={user?.id??"signed-out"} signedIn={!!user} busy={busy} progress={progress} currentPrompt={prompt} onStop={stop} onGenerate={runGeneration} onApply={(text,options)=>{if(controller.current)return;setPrompt(text);setDraft(null);setError("");if(options){setSettings({style:options.style,engine:"schnell",canvas:"square",styleNotes:""});setCount(options.count);}}}/>
   </section>;
 }

@@ -1,0 +1,24 @@
+/* Inline Fireball studio — isolated from the separate floating guide. */
+.df-fireball-studio .df-workspace{grid-template-columns:300px minmax(0,1fr);gap:0;padding:20px;overflow:visible;border-radius:28px}
+.df-fireball-studio .df-fireball-character{display:flex;flex-direction:column;align-items:center;gap:20px;padding:22px 12px;align-self:start;position:sticky;top:95px;min-width:0}
+.df-assistant-mascot{position:relative;width:155px;height:180px;display:grid;place-items:center}
+.df-assistant-mascot img{width:140px;height:168px;object-fit:contain;position:relative;filter:drop-shadow(0 14px 25px #fb6a3b55);animation:df-float 4s ease-in-out infinite}
+.df-mascot-halo{position:absolute;inset:24px 5px 4px;border-radius:50%;background:radial-gradient(circle,#ffaf5055,transparent 68%)}
+.df-mascot-spark{position:absolute;right:0;top:28px;color:#ffd080;font-size:28px;animation:df-float 3s ease-in-out infinite reverse}
+.df-fireball-studio .df-fireball-speech-bubble{width:100%;padding:22px;border:1px solid var(--df-border);border-radius:22px;background:linear-gradient(145deg,var(--df-tint),var(--df-card));box-shadow:0 12px 35px #0001;position:relative;color:var(--df-text)}
+.df-fireball-studio .df-fireball-speech-bubble:before{content:'';position:absolute;left:calc(50% - 9px);top:-10px;width:18px;height:18px;transform:rotate(45deg);background:var(--df-tint);border-top:1px solid var(--df-border);border-left:1px solid var(--df-border)}
+.df-guide-label{display:block;font-size:9px;font-weight:800;letter-spacing:1.6px;color:var(--df-highlight);margin-bottom:12px}
+.df-fireball-studio .df-fireball-speech-bubble p{font-size:17px;line-height:1.6;margin:0}
+.df-fireball-studio .df-form{padding:24px;gap:8px}
+.df-fireball-studio .df-preview{margin-top:26px;border:1px solid var(--df-border);border-radius:22px;padding:0 20px 20px}
+.df-fireball-studio .df-preview-stage{min-height:400px;border-radius:16px;isolation:isolate}
+.df-fireball-studio .df-preview-stage[data-generating=true]>.df-empty{visibility:hidden}
+.df-fireball-studio .df-ready{padding:18px;border:1px solid var(--df-border);border-radius:16px;background:var(--df-tint);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.df-fireball-studio .df-enhancement textarea{min-height:190px}
+.df-fireball-studio .df-enhancement>p{margin:12px 0}
+.df-fireball-studio .df-helper-actions{display:flex;flex-wrap:wrap;gap:14px;margin:18px 0 8px}
+.df-fireball-studio .df-helper-actions button{padding:13px 18px;border-radius:12px;min-height:46px;font-size:13px;font-weight:700}
+.df-fireball-studio .df-form>.df-generate{margin:18px 0 14px}
+.df-fireball-studio .df-control-grid{gap:20px}
+@media(max-width:850px){.df-fireball-studio .df-workspace{grid-template-columns:1fr;padding:10px}.df-fireball-studio .df-fireball-character{position:static;display:grid;grid-template-columns:82px minmax(0,1fr);padding:10px;gap:16px}.df-assistant-mascot{width:82px;height:100px}.df-assistant-mascot img{width:78px;height:98px}.df-mascot-spark{font-size:18px;right:-6px;top:6px}.df-fireball-studio .df-fireball-speech-bubble{padding:16px}.df-fireball-studio .df-fireball-speech-bubble:before{left:-10px;top:28px;transform:rotate(-45deg)}.df-fireball-studio .df-fireball-speech-bubble p{font-size:14px}.df-fireball-character .df-idea-cloud{grid-column:1/-1;margin-top:20px}.df-fireball-studio .df-form{padding:12px}.df-fireball-studio .df-preview{padding:0 12px 12px}.df-fireball-studio .df-preview-stage{min-height:350px;aspect-ratio:auto}}
+@media(max-width:450px){.df-fireball-studio .df-helper-actions{gap:12px}.df-fireball-studio .df-helper-actions button{flex:1;min-width:140px}.df-guide-label{font-size:8px;letter-spacing:1px}.df-fireball-studio .df-preview-stage{min-height:360px}}

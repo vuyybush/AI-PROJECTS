@@ -36,7 +36,7 @@ export async function generateCloudflareImage(
   const seed = crypto.getRandomValues(new Uint32Array(1))[0];
   const primary: { model: string; payload: Record<string, string | number> } = input.engine === "phoenix"
     ? { model: PHOENIX_MODEL, payload: { prompt: finalPrompt, width, height, num_steps: 10, seed } }
-    : { model: SCHNELL_MODEL, payload: { prompt: finalPrompt, steps: 4 } };
+    : { model: SCHNELL_MODEL, payload: { prompt: finalPrompt, num_steps: 4, width: 1024, height: 1024, seed } };
   try {
     return { ...await runModel(account, token, primary.model, primary.payload, signal), model: primary.model, fallback: false };
   } catch (error) {
@@ -55,7 +55,11 @@ async function runModel(
   const response = await fetch(`https://api.cloudflare.com/client/v4/accounts/${account}/ai/run/${model}`, {
     method: "POST",
     headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    body: JSON.stringify(
+      model === "@cf/black-forest-labs/flux-1-schnell"
+        ? { prompt: payload.prompt, steps: 4 }
+        : payload
+    ),
     signal,
     cache: "no-store",
     redirect: "error",
@@ -82,6 +86,7 @@ async function runModel(
       model,
       status: response.status,
       codes,
+      errors: data?.errors,
       requestId: response.headers.get("cf-ray"),
     });
   }

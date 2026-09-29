@@ -1,0 +1,137 @@
+/* Color edition. Dark is the default; the appearance dock remembers the user's choice. */
+html:root{--df-bg:#0c0e1b;--df-card:#15182a;--df-surface:#1c2036;--df-field:#101426;--df-text:#f3f3ff;--df-muted:#b6bad4;--df-border:#353b5d;--df-tint:#24213e;--df-highlight:#c7a9ff;--df-soft:#272e49;--df-shadow:0 22px 65px #0003;color-scheme:dark;background:var(--df-bg);color:var(--df-text)}
+html[data-df-theme=light]{--df-bg:#faf9ff;--df-card:#fff;--df-surface:#f1f0fb;--df-field:#fff;--df-text:#24203b;--df-muted:#5e5874;--df-border:#d8d2ea;--df-tint:#f1e8ff;--df-highlight:#6941b5;--df-soft:#e6eafa;--df-shadow:0 20px 60px #5d379010;color-scheme:light}
+html body{background:var(--df-bg);color:var(--df-text)}
+html .dreamforge{--ink:var(--df-text);--muted:var(--df-muted);--paper:var(--df-card);--line:var(--df-border);--line-strong:var(--df-border);--surface-strong:var(--df-surface);--accent:#bc8aff;--accent-strong:#d4b5ff;--accent-tint:var(--df-tint);--accent-ink:#fff;color:var(--df-text);background:var(--df-bg);color-scheme:inherit}
+html .dreamforge .df-header{background:var(--df-bg);border-color:var(--df-border);gap:26px}
+html .dreamforge .df-brand-dot,html .dreamforge .df-mark{color:#f88c6e}
+html .dreamforge .df-nav a:hover{color:var(--df-highlight)}
+html .dreamforge .df-header-cta,html .dreamforge .df-pill.df-ink{background:linear-gradient(110deg,#6332bc,#a63174);color:#fff!important;border:0;border-radius:12px}
+html .dreamforge .df-manifesto{border-color:var(--df-border);background:linear-gradient(100deg,var(--df-card),var(--df-tint));letter-spacing:-.04em}
+html .dreamforge .df-coral{color:var(--df-highlight)}
+html .dreamforge .df-section-heading h2,html .dreamforge .df-lab h2{background:linear-gradient(110deg,var(--df-text) 5%,var(--df-highlight) 65%,#f38b70);background-clip:text;-webkit-background-clip:text;color:transparent;padding-bottom:5px}
+html .dreamforge .df-workspace{background:var(--df-card);border-color:var(--df-border);box-shadow:var(--df-shadow)}
+html .dreamforge .df-form{background:transparent}
+html .dreamforge :is(.df-form textarea,.df-creative input,.df-creative select,.df-lab input,.df-lab textarea,.df-lab select,.df-account input){background:var(--df-field);color:var(--df-text);border:1px solid var(--df-border);border-radius:12px;padding:14px;font-size:15px;line-height:1.55;transition:border-color .2s,box-shadow .2s}
+html .dreamforge :is(input,textarea)::placeholder{color:var(--df-muted);opacity:.85}
+html .dreamforge :is(input,textarea,select):focus{border-color:#ae86ee;box-shadow:0 0 0 4px #a166f51f;outline:0}
+html .dreamforge :focus-visible,html .df-appearance button:focus-visible{outline:3px solid #bc8aff;outline-offset:4px}
+html .dreamforge :is(.df-label-line,.df-control-label,.df-control-grid label,.df-form legend,.df-enhancement label){color:var(--df-text)}
+html .dreamforge :is(.df-note,.df-demo-badge,.df-section-heading p,.df-label-line>span,.df-preview-footer,.df-empty p,.df-lab-disclosure,.df-lab-status,.df-lab small,.df-lab-scenes-heading span,.df-save-status,.df-history-grid small,.df-account>div>p:last-child,.df-result-source small){color:var(--df-muted)}
+html .dreamforge .df-generate,html .dreamforge .df-lab button.df-lab-primary,html .dreamforge .df-download{background:linear-gradient(110deg,#6735c5,#9f287b,#b13b30);background-size:220% 100%;border:1px solid #ffffff1c;border-radius:14px;color:#fff;font-weight:700;box-shadow:0 8px 24px #8c44db2b;animation:df-gradient 7s ease-in-out infinite;min-height:48px;transition:transform .2s,box-shadow .2s}
+html .dreamforge .df-generate:hover:not(:disabled),html .dreamforge .df-lab button.df-lab-primary:hover,html .dreamforge .df-download:hover{transform:translateY(-2px);box-shadow:0 12px 28px #9349ff3d}
+html .dreamforge :is(.df-styles button,.df-lab button,.df-lab-upload,.df-account button,.df-history button,.df-helper-actions button,.df-ready button,.df-text-button){background:var(--df-tint);border:1px solid var(--df-border);color:var(--df-text);border-radius:12px;padding:12px 16px;min-height:44px;font-size:13px;line-height:1.4;text-decoration:none;transition:transform .2s,background .2s,border-color .2s}
+html .dreamforge :is(.df-styles button,.df-lab button,.df-helper-actions button):hover:not(:disabled){transform:translateY(-2px);border-color:#b089ee;background:var(--df-soft)}
+html .dreamforge .df-helper-actions{gap:14px;flex-wrap:wrap;margin:18px 0}
+html .dreamforge .df-helper-actions button:first-child{background:linear-gradient(120deg,#6638b2,#2c589c);color:white;border-color:#8b6ec6}
+html .dreamforge .df-styles{gap:12px}
+html .dreamforge .df-styles button[aria-pressed=true],html .dreamforge .df-account-tabs [aria-pressed=true]{background:linear-gradient(115deg,#6941b6,#354da2);color:white;border-color:#a78be9;box-shadow:0 0 0 3px #a78be91c}
+html .dreamforge .df-enhancement{background:linear-gradient(140deg,var(--df-tint),var(--df-card));border:1px solid var(--df-border);border-radius:18px;padding:22px}
+html .dreamforge .df-preview{background:var(--df-surface);border-color:var(--df-border)}
+html .dreamforge .df-preview-stage,html .dreamforge .df-preview-stage:has(img){background-color:var(--df-field);background-image:radial-gradient(var(--df-border) .7px,transparent .7px);border-color:var(--df-border)}
+html .dreamforge .df-preview-bar{color:var(--df-muted)}
+html .dreamforge .df-preview-stage>img{z-index:1}
+html .dreamforge .df-empty h3{color:var(--df-text)}
+html .dreamforge .df-canvas-symbol{color:var(--df-muted)}
+html .dreamforge .df-result-warning{background:var(--df-tint);color:var(--df-text);border-color:#bd8df5}
+html .dreamforge .df-auth-required{background:var(--df-tint);color:var(--df-text);border-radius:12px}
+html .dreamforge .df-error{background:#4a202f;color:#ffcfdb;border:1px solid #984457;border-radius:12px;line-height:1.6}
+html[data-df-theme=light] .dreamforge .df-error{background:#fff0f3;color:#93243e;border-color:#e8a5b5}
+html .dreamforge .df-save-status[data-saved=false]{color:var(--df-highlight)}
+html .dreamforge .df-account{background:linear-gradient(140deg,var(--df-bg),var(--df-tint));border-color:var(--df-border)}
+html .dreamforge .df-history-grid article{background:var(--df-card);border-color:var(--df-border);border-radius:18px}
+html .dreamforge .df-history-grid img{background:var(--df-surface)}
+html .dreamforge .df-explore,html .dreamforge .df-idea-grid,html .dreamforge .df-idea-card,html .dreamforge .df-footer{border-color:var(--df-border)}
+html .dreamforge .df-idea-card{background:var(--df-card);color:var(--df-text)}
+html .dreamforge .df-idea-card p,html .dreamforge .df-footer p{color:var(--df-muted)}
+html .dreamforge .df-about{background:linear-gradient(120deg,var(--df-tint),var(--df-card));color:var(--df-text)}
+html .dreamforge .df-footer{background:var(--df-bg);color:var(--df-text);padding-bottom:95px}
+html .dreamforge .df-intro-replay{color:var(--df-text);border-color:var(--df-border);background:var(--df-card)}
+/* The Create action stays inside the animated prompt bar. */
+html .dreamforge .df-hero-prompt{position:relative;isolation:isolate;display:flex;align-items:stretch;gap:8px;padding:8px;max-width:650px;border:1px solid #c6b1fa70;border-radius:20px;background:linear-gradient(115deg,#13172ef2,#372248ef);box-shadow:0 0 0 5px #bda4ff12,0 20px 55px #0004;overflow:hidden}
+html .dreamforge .df-hero-prompt:before{content:'';position:absolute;inset:0;background:linear-gradient(110deg,#4ae3ed20,#df6cf42b,#ffbf5626,#4ae3ed20);background-size:300% 100%;animation:df-gradient 7s ease-in-out infinite;z-index:-1;pointer-events:none}
+html .dreamforge .df-hero-prompt input{background:transparent;border:0;box-shadow:none;color:white;font-size:16px;padding:16px;flex:1;width:0;min-width:0;border-radius:12px}
+html .dreamforge .df-hero-prompt input::placeholder{color:#ded8f5}
+html .dreamforge .df-hero-prompt button{flex-shrink:0;position:relative;border-radius:13px;padding:16px 25px;background:linear-gradient(110deg,#7241ce,#ba337c,#ce4929);background-size:230% 100%;animation:df-gradient 5s ease-in-out infinite;color:#fff;font-weight:700;box-shadow:0 4px 20px #cc4e8060}
+html .dreamforge .df-hero-prompt button:hover{filter:brightness(1.12)}
+/* Story Lab: violet/cyan/coral cards and subtle animated color borders. */
+html .dreamforge .df-lab{position:relative;background:radial-gradient(ellipse at 0 10%,#8653ed20,transparent 45%),radial-gradient(ellipse at 100% 65%,#22bfbf13,transparent 40%),var(--df-bg);color:var(--df-text);border-block:1px solid var(--df-border)}
+html .dreamforge .df-lab-toolbar{padding:22px;border:1px solid var(--df-border);border-radius:22px;background:var(--df-card);gap:14px;box-shadow:var(--df-shadow)}
+html .dreamforge .df-lab-workspace{grid-template-columns:minmax(240px,310px) minmax(0,1fr);gap:28px}
+html .dreamforge .df-lab-profile{background:linear-gradient(145deg,var(--df-tint),var(--df-card));border:1px solid var(--df-border);border-top:3px solid #b68be8;padding:24px;border-radius:22px;box-shadow:var(--df-shadow)}
+html .dreamforge .df-lab-profile h3{color:var(--df-highlight)}
+html .dreamforge .df-lab-scene{--scene-color:#b087ee;--scene-glow:#9564e825;position:relative;background:radial-gradient(ellipse at top right,var(--scene-glow),transparent 65%) padding-box,linear-gradient(var(--df-card),var(--df-card)) padding-box,linear-gradient(110deg,#a273de,#469fac,#dd8972) border-box;background-size:auto,auto,220% 100%;border:1px solid transparent;border-top:3px solid var(--scene-color);border-radius:22px;padding:26px;box-shadow:var(--df-shadow);animation:df-gradient 10s ease-in-out infinite;transition:transform .25s,box-shadow .25s}
+html .dreamforge .df-lab-scene:nth-of-type(3n+2){--scene-color:#66c8d1;--scene-glow:#40bbcc20}
+html .dreamforge .df-lab-scene:nth-of-type(3n+3){--scene-color:#ed9b84;--scene-glow:#e87f6b20}
+html .dreamforge .df-lab-scene:hover{transform:translateY(-3px);box-shadow:0 20px 55px #8651e320}
+html .dreamforge .df-lab-scene-heading strong{color:var(--scene-color);background:var(--df-tint);padding:9px 12px;border-radius:30px;font-size:10px}
+html[data-df-theme=light] .dreamforge .df-lab-scene-heading strong{color:#573685}
+html .dreamforge .df-lab-prompt{background:var(--df-field);border:1px solid var(--df-border);border-radius:14px;color:var(--df-text);line-height:1.7}
+html .dreamforge .df-lab-actions{gap:12px;margin-block:12px}
+html .dreamforge .df-lab-reference,html .dreamforge .df-lab-frame{background:var(--df-field);border-radius:16px;border:1px solid var(--df-border)}
+html .dreamforge .df-lab-research{border-color:var(--df-border);margin-top:32px;padding:24px;background:var(--df-card);border-radius:18px}
+html .dreamforge .df-lab input[type=file]{font-size:12px;line-height:1.5;padding:10px;max-width:100%}
+html .dreamforge input::file-selector-button{border:0;border-radius:8px;padding:8px 10px;margin-right:10px;color:white;background:#7044ae;cursor:pointer}
+/* Persistent user controls. */
+.df-appearance{position:fixed;left:18px;bottom:18px;z-index:80;display:flex;align-items:center;gap:3px;padding:5px;background:var(--df-card);border:1px solid var(--df-border);border-radius:40px;box-shadow:0 8px 35px #0003;color:var(--df-text);font-family:Arial,Helvetica,sans-serif}
+.df-appearance button{display:flex;align-items:center;gap:8px;background:none;border:0;color:var(--df-text);border-radius:30px;padding:10px 13px;font:600 12px Arial,Helvetica,sans-serif;cursor:pointer;min-height:40px}
+.df-appearance button:hover{background:var(--df-tint)}
+.df-appearance button>span:first-child{font-size:19px;color:var(--df-highlight)}
+.df-appearance-divider{height:22px;border-left:1px solid var(--df-border)}
+/* Local cloud cards rotate content every ten seconds while generation is active. */
+.df-idea-cloud{position:relative;margin-top:24px;width:100%;border:1px solid var(--df-border);border-radius:30px;background:var(--df-tint);box-shadow:0 18px 45px #814eb322;animation:df-float 6s ease-in-out infinite;color:var(--df-text)}
+.df-cloud-puffs{position:absolute;top:-16px;left:20%;right:20%;height:32px;display:flex;align-items:end;justify-content:center;gap:0;z-index:0}
+.df-cloud-puffs i{width:40%;height:32px;background:var(--df-tint);border-radius:50% 50% 0 0;border-top:1px solid var(--df-border)}
+.df-cloud-puffs i:nth-child(2){height:45px;width:45%}
+.df-cloud-content{position:relative;padding:20px;animation:df-card-in .55s ease-out}
+.df-cloud-label{display:flex;justify-content:space-between;align-items:center;font-size:9px;letter-spacing:1.5px;color:var(--df-highlight);font-weight:700}
+.df-cloud-art{height:105px;display:flex;align-items:center;justify-content:space-around;position:relative;font-size:25px}
+.df-cloud-art strong{font-size:57px;font-weight:400;filter:drop-shadow(0 7px 10px #0002)}
+.df-cloud-art span{animation:df-float 3s ease-in-out infinite}
+.df-cloud-art span:nth-of-type(2){animation-delay:-1.5s}
+.df-cloud-art i{position:absolute;bottom:0;right:30%;font-style:normal;font-size:21px}
+.df-cloud-content h4{margin:8px 0;font-size:17px;line-height:1.3}
+.df-cloud-content p{font-size:13px!important;line-height:1.7!important;color:var(--df-muted)}
+.df-cloud-content small{display:block;font-size:9px;line-height:1.5;letter-spacing:.3px;color:var(--df-muted);margin-top:14px}
+/* This entire layer only mounts while an image batch is generating. */
+.df-making{position:absolute;inset:0;z-index:3;overflow:hidden;display:grid;place-items:center;text-align:center;background:#17132e;color:#fff;min-height:340px}
+.df-making-aurora{position:absolute;inset:-50%;background:conic-gradient(from 0deg,#67388888,#184e7488,#22696b88,#74334e88,#67388888);filter:blur(40px);animation:df-aurora 24s linear infinite;opacity:.95}
+.df-making-grid{position:absolute;inset:0;background-image:radial-gradient(#ffffff35 .7px,transparent .7px);background-size:24px 24px;mask-image:linear-gradient(0deg,transparent,#0008,transparent)}
+.df-making-center{position:relative;z-index:2;padding:28px 16px;max-width:400px}
+.df-making-tag{font-size:9px;letter-spacing:2.5px;color:#f0c9f9;border:1px solid #ffffff3a;border-radius:30px;padding:8px 12px;background:#17132e60;display:inline-block}
+.df-making-orbit{width:160px;height:160px;position:relative;margin:20px auto 12px;display:grid;place-items:center}
+.df-making-orbit img{position:relative;width:108px;height:136px;object-fit:contain;animation:df-float 3s ease-in-out infinite;filter:drop-shadow(0 5px 25px #ff8c6650)}
+.df-making-orbit i{position:absolute;inset:0;border:1px solid #ffffff25;border-top-color:#dba7ff;border-radius:50%;animation:df-aurora 6s linear infinite}
+.df-making-orbit i:nth-child(2){inset:14px;border-top-color:transparent;border-right-color:#83e8e1;animation-direction:reverse;animation-duration:8s}
+.df-making-center h3{font-size:clamp(25px,3vw,37px)!important;line-height:1.15!important;letter-spacing:-1px;margin:0 0 15px!important;color:white!important;font-weight:600!important}
+.df-making-center p{font-size:13px;color:#e6def6;margin:0!important}
+.df-making-center small{display:block;font-size:10px;color:#d7cfe8;line-height:1.6}
+.df-making-dots{display:flex;justify-content:center;gap:6px;margin:18px}
+.df-making-dots i{width:6px;height:6px;background:#f1b3e5;border-radius:50%;animation:df-dot 1.8s ease-in-out infinite}
+.df-making-dots i:nth-child(2){animation-delay:.2s;background:#8de3dc}.df-making-dots i:nth-child(3){animation-delay:.4s;background:#ffd49b}
+.df-making-particles span{position:absolute;font-size:26px;opacity:.65;animation:df-float 5s ease-in-out infinite;z-index:1}
+.df-making-particles span:nth-child(1){top:15%;left:14%;color:#ffd2f1}.df-making-particles span:nth-child(2){top:65%;left:9%;animation-delay:-2s}.df-making-particles span:nth-child(3){top:24%;right:12%;color:#beeefc}.df-making-particles span:nth-child(4){bottom:20%;right:15%;animation-delay:-3s}.df-making-particles span:nth-child(5){bottom:10%;left:40%;color:#ffe4ac}.df-making-particles span:nth-child(6){top:9%;right:35%;animation-delay:-1s}
+@keyframes df-float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-9px) rotate(2deg)}}
+@keyframes df-gradient{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes df-aurora{to{transform:rotate(360deg)}}
+@keyframes df-dot{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(-5px);opacity:1}}
+@keyframes df-card-in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:1023px){html .dreamforge .df-header{gap:14px}html .dreamforge .df-lab-workspace{grid-template-columns:1fr}html .dreamforge .df-lab-scene:hover{transform:none}.df-making-aurora{animation:none}.df-making-particles span:nth-child(n+4){display:none}.df-idea-cloud,.df-cloud-art span{animation:none}}
+@media(max-width:767px){html .dreamforge .df-nav-open{background:var(--df-card);border-color:var(--df-border)}html .dreamforge .df-menu{background:var(--df-card);color:var(--df-text);border-color:var(--df-border)}html .dreamforge .df-hero-prompt{display:flex;flex-direction:row;gap:5px;padding:6px;border-radius:16px}html .dreamforge .df-hero-prompt input{padding:12px 9px;font-size:16px}html .dreamforge .df-hero-prompt button{padding:12px;gap:8px;font-size:13px}html .dreamforge .df-hero-prompt button svg{width:16px}html .dreamforge .df-lab-toolbar{padding:16px}html .dreamforge .df-lab-scene{padding:18px}html .dreamforge .df-enhancement{padding:15px}.df-appearance{left:12px;bottom:12px}.df-appearance button{padding:8px 10px}.df-motion-word{display:none}.df-assistant-mascot img,.df-mascot-spark{animation:none}.df-making-center{padding:20px 12px}.df-making-orbit{width:120px;height:120px;margin:16px auto}.df-making-orbit img{width:86px;height:110px}.df-making-particles span{font-size:20px}}
+html[data-df-effects=paused] :is(.df-hero-prompt,.df-hero-prompt:before,.df-hero-prompt button,.df-generate,.df-download,.df-lab-primary,.df-lab-scene,.df-assistant-mascot img,.df-mascot-spark,.df-idea-cloud,.df-cloud-content,.df-cloud-art span,.df-making-aurora,.df-making-orbit i,.df-making-orbit img,.df-making-particles span,.df-making-dots i){animation:none!important;transition:none!important}
+@media(prefers-reduced-motion:reduce){html .dreamforge *,html .dreamforge *:before,html .dreamforge *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.df-appearance *{transition:none!important}}
+
+/* Keep the loading caption fully inside the canvas at every width. */
+html .dreamforge .df-fireball-studio .df-preview-stage[data-generating=true]{min-height:490px}
+.df-making-center{box-sizing:border-box;width:min(100%,400px);padding:24px 16px}
+.df-making-orbit{width:135px;height:135px;margin:18px auto 12px}
+.df-making-orbit img{width:96px;height:122px}
+.df-making-center h3{font-size:32px!important}
+.df-cloud-art strong>svg{width:88px;height:88px;display:block}
+.df-cloud-art span>svg{width:28px;height:28px;display:block}
+.df-cloud-art i>svg{width:25px;height:25px;display:block}
+.df-making-particles span>svg{width:34px;height:34px;display:block}
+html .dreamforge .df-lab-toolbar>button:nth-of-type(1){background:linear-gradient(120deg,#6b39b6,#a53880);color:white;border-color:#b589e8}
+html .dreamforge .df-lab-toolbar>button:nth-of-type(2){background:linear-gradient(120deg,#256576,#305a9b);color:white;border-color:#689bc6}
+html .dreamforge .df-lab-toolbar>button:nth-of-type(3){background:linear-gradient(120deg,#814ba0,#a94353);color:white;border-color:#b285b9}
+@media(max-width:767px){html .dreamforge .df-fireball-studio .df-preview-stage[data-generating=true]{min-height:450px}.df-making-center h3{font-size:26px!important}.df-making-center{padding:20px 14px}.df-making-particles span>svg{width:24px;height:24px}}

@@ -18,7 +18,7 @@ function loadTurnstile(){
   return loader;
 }
 
-const HumanCheck=forwardRef<HumanCheckHandle,{action:"generate"|"account"}>(function HumanCheck({action},ref){
+const HumanCheck=forwardRef<HumanCheckHandle,{action:"generate"|"account"|"enhance"}>(function HumanCheck({action},ref){
   const container=useRef<HTMLDivElement>(null),widget=useRef<string|null>(null);
   const pending=useRef<{resolve:(token:string)=>void;reject:(error:Error)=>void}|null>(null);
   const [message,setMessage]=useState("");
