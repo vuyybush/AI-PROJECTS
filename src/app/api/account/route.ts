@@ -8,7 +8,7 @@ export async function POST(request:Request){try{
   if(body.action==="logout") {const {error}=await client.auth.signOut({scope:"local"});if(error)throw error;return Response.json({ok:true},{headers:PRIVATE_HEADERS});}
   if(!["login","signup"].includes(String(body.action)))throw new GenerationError(400,"INVALID_ACTION","Choose sign in or create account.");
   const email=typeof body.email==="string"?body.email.trim():"",password=body.password;
-  if(email.length>254||!/^\S+@\S+\.\S+$/.test(email)||typeof password!=="string"||password.length>128||password.length<(body.action==="signup"?12:1))throw new GenerationError(400,"INVALID_CREDENTIALS","Enter a valid email. New passwords must have 12–128 characters.");
+  if(email.length>254||!/^\S+@\S+\.\S+$/.test(email)||typeof password!=="string"||password.length>128||password.length<(body.action==="signup"?8:1))throw new GenerationError(400,"INVALID_CREDENTIALS","Enter a valid email. New passwords must have 8–128 characters.");
   await verifyHuman(body.turnstileToken,"account");
   const response=body.action==="signup"?await client.auth.signUp({email,password,options:{emailRedirectTo:`${appOrigin()}/auth/callback`}}):await client.auth.signInWithPassword({email,password});
   if(response.error){
@@ -17,3 +17,4 @@ export async function POST(request:Request){try{
   }
   return Response.json({ok:true,confirmationRequired:body.action==="signup"&&!response.data.session,message:body.action==="signup"&&!response.data.session?"If your address is eligible, a confirmation email will arrive. Open it in this browser, then sign in.":"Signed in."},{headers:PRIVATE_HEADERS});
 }catch(error){return accountError(error);}}
+

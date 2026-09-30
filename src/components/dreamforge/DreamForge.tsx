@@ -1,13 +1,13 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { type StylePreset } from "./presets";
 import "./dreamforge.css";
 import CinematicIntro from "./CinematicIntro";
 // Import FireballAssistant instead of CreativeStudio
 import FireballAssistant from "./FireballAssistant";
 // import CreativeStudio from "./CreativeStudio"; // Commented out
 import AccountProvider from "./AccountProvider";
+import WelcomeGate from "./WelcomeGate";
 import AccountPanel from "./AccountPanel";
 import History from "./History";
 import StoryLab from "./StoryLab";
@@ -18,10 +18,10 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d={diagonal ? "M5 19 19 5M5 5h14v14" : "M4 12h16m-6-6 6 6-6 6"} stroke="currentColor" strokeWidth="1.7" /></svg>;
 }
 
-export default function DreamForge(){return <AccountProvider><DreamForgePage/></AccountProvider>;}
+export default function DreamForge(){return <AccountProvider><WelcomeGate><DreamForgePage/></WelcomeGate></AccountProvider>;}
 function DreamForgePage() {
   const root = useRef<HTMLDivElement>(null);
-  const [introOpen, setIntroOpen] = useState(true);
+  const [introOpen, setIntroOpen] = useState(false);
   const [introReplay, setIntroReplay] = useState(0);
   const completeIntro = useCallback(() => setIntroOpen(false), []);
   const [motion, setMotion] = useState(false);
@@ -41,16 +41,16 @@ function DreamForgePage() {
       const enabled = query.matches && !paused && !introOpen;
       setMotion(enabled);
       if (!enabled) return;
-      const module = await import("./desktop-motion");
-      if (!disposed && current === version && root.current) stop = module.attachDesktopMotion(root.current);
+      const motionModule = await import("./desktop-motion");
+      if (!disposed && current === version && root.current) stop = motionModule.attachDesktopMotion(root.current);
     };
     void update();
     query.addEventListener("change", update);
     return () => { disposed = true; version++; stop?.(); query.removeEventListener("change", update); };
   }, [paused, introOpen]);
 
-  return <div ref={root} className="dreamforge" data-motion={motion} data-visible="true">
-    <CinematicIntro replay={introReplay} onComplete={completeIntro} />
+  return <div ref={root} className="dreamforge df-entry-reveal" data-motion={motion} data-visible="true">
+    {introReplay > 0 && <CinematicIntro replay={introReplay} onComplete={completeIntro} />}
     <a className="df-skip" href="#studio">Skip to image studio</a>
 
     <header className="df-header">
